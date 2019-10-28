@@ -8,10 +8,12 @@
 data "azurerm_client_config" "client_config" {}
 
 module "icpprovision" {
-  source = "git::https://github.com/IBM-CAMHub-Development/template_icp_modules.git?ref=2.3//public_cloud"
+  source = "git::https://github.com/IBM-CAMHub-Development/template_icp_modules.git?ref=3.2.1//public_cloud"
  
   bastion_host = "${element(concat(azurerm_public_ip.bootnode_pip.*.ip_address, azurerm_public_ip.master_pip.*.ip_address), 0)}"
 
+  dependsOn = true
+  
   # Provide IP addresses for boot, master, mgmt, va, proxy and workers
   boot-node = "${element(concat(azurerm_network_interface.boot_nic.*.private_ip_address, azurerm_network_interface.master_nic.*.private_ip_address), 0)}"
 

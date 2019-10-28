@@ -394,10 +394,10 @@
       "default": {
         "nodes": "1",
         "name" : "master",
-        "vm_size" : "Standard_A8_v2",
-    	"os_disk_size"  : "300",               
+        "vm_size" : "Standard_D8_v3",
+    	"os_disk_size"  : "800",               
         "os_disk_type": "Standard_LRS",
-        "docker_disk_size": "100",
+        "docker_disk_size": "150",
         "docker_disk_type": "Standard_LRS",
 	    "etcd_data_size" : "10",
 	    "etcd_data_type" : "StandardSSD_LRS",
@@ -419,10 +419,10 @@
       "default": {
         "nodes": "1",
         "name" : "proxy",
-        "vm_size" : "Standard_A4_v2",
-    	"os_disk_size"  : "150",                       
+        "vm_size" : "Standard_D4_v3",
+    	"os_disk_size"  : "350",                       
         "os_disk_type": "Standard_LRS",
-        "docker_disk_size": "100",
+        "docker_disk_size": "150",
         "docker_disk_type": "Standard_LRS"        
       },
       "description": "Proxy Node vm settings. If set to 0, the master node becomes proxy too.",
@@ -439,10 +439,10 @@
       "default": {
         "nodes": "1",
         "name" : "worker",
-        "vm_size" : "Standard_A4_v2",
-    	"os_disk_size"  : "150",                       
+        "vm_size" : "Standard_D8_v3",
+    	"os_disk_size"  : "350",                       
         "os_disk_type": "Standard_LRS",
-        "docker_disk_size": "100",
+        "docker_disk_size": "150",
         "docker_disk_type": "Standard_LRS"        
       },
       "description": "Worker Node vm settings.If set to 0, the master node becomes worker too.",
@@ -459,10 +459,10 @@
       "default": {
         "nodes": "1",      
         "name" : "mgmt",
-        "vm_size" : "Standard_A8_v2",
-    	"os_disk_size"  : "250",               
+        "vm_size" : "Standard_D8_v3",
+    	"os_disk_size"  : "300",               
         "os_disk_type": "Standard_LRS",
-        "docker_disk_size": "100",
+        "docker_disk_size": "150",
         "docker_disk_type": "Standard_LRS"        
       },
       "description": "Management Node vm settings. If the node value is 0, the master node will be set as a management node.",
@@ -479,10 +479,10 @@
       "default": {
         "nodes": "1",
         "name" : "va",
-        "vm_size" : "Standard_A8_v2",
-    	"os_disk_size"  : "400",           
+        "vm_size" : "Standard_D8_v3",
+    	"os_disk_size"  : "800",           
         "os_disk_type": "Standard_LRS",
-        "docker_disk_size": "100",                   	            
+        "docker_disk_size": "150",                   	            
         "docker_disk_type": "Standard_LRS"
       },
       "description": "VA Node vm settings",
@@ -591,7 +591,7 @@
     {
     "name": "icp_inception_image",
     "description": "IBM Cloud Private Version Number",
-    "default" : "ibmcom/icp-inception-amd64:3.2.0-ee",
+    "default" : "ibmcom/icp-inception-amd64:3.2.1-ee",
     "type": "string",
     "required": false,
     "secured": false,

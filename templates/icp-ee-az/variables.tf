@@ -111,7 +111,7 @@ variable "icpadmin_password" {
 }
 variable "icp_inception_image" {
     description = "ICP Inception image to use"
-    default = "ibmcom/icp-inception-amd64:3.2.0-ee"
+    default = "ibmcom/icp-inception-amd64:3.2.1-ee"
 }
 variable "cluster_name" {
   description = "Deployment name for resources prefix"
@@ -129,7 +129,7 @@ variable "boot" {
     vm_size       = "Standard_A8_v2"
     os_disk_type  = "Standard_LRS"
     os_disk_size  = "200"
-    docker_disk_size = "100"
+    docker_disk_size = "150"
     docker_disk_type = "StandardSSD_LRS"
   }
 }

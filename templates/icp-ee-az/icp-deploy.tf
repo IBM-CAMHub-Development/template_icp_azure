@@ -45,9 +45,11 @@ resource "null_resource" "image_copy" {
 }
 
 module "icpprovision" {
-  source = "git::https://github.com/IBM-CAMHub-Development/template_icp_modules.git?ref=2.3//public_cloud"
+  source = "git::https://github.com/IBM-CAMHub-Development/template_icp_modules.git?ref=3.2.1//public_cloud"
 
   bastion_host = "${azurerm_public_ip.bootnode_pip.ip_address}"
+
+  dependsOn = true
   
   ssh_agent = false
   install-verbosity = "${var.install_verbosity != "" ? "${var.install_verbosity}" : ""}"
