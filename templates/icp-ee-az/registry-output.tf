@@ -1,5 +1,5 @@
 module "gather_output" {
-	dependsOn					= true
+	dependsOn					= "${module.icpprovision.install_complete}"
     source 						= "git::https://github.com/IBM-CAMHub-Development/template_icp_modules.git?ref=3.2.1//public_cloud_output"
 	cluster_CA_domain 			= "${element(azurerm_public_ip.master_pip.*.fqdn, 0)}"
 	icp_master 					= "${azurerm_network_interface.master_nic.*.private_ip_address}"
