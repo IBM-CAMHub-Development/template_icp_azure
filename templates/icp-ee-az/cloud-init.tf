@@ -8,6 +8,8 @@ data "template_file" "common_config" {
   #cloud-config
   package_upgrade: true
   packages:
+    - unzip
+    - pv
     - cifs-utils
     - nfs-common
     - python-yaml
