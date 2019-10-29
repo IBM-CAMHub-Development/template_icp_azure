@@ -25,7 +25,6 @@ variable "default_tags" {
   }
 }
 
-
 variable "resource_group" {
   description = "Azure resource group name"
   default = "icp_rg"

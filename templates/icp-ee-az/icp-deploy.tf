@@ -45,31 +45,34 @@ resource "null_resource" "image_copy" {
   }  
 }
 
-module "image_load" {
-    source = "git::https://github.com/IBM-CAMHub-Development/template_icp_modules.git?ref=3.2.1//public_cloud_image_load"
+#module "image_load" {
+#    source = "git::https://github.com/IBM-CAMHub-Open/template_icp_modules.git?ref=3.2.1//public_cloud_image_load"
     
     # define dependency on image_copy
-    image_copy_finished = "${null_resource.image_copy.id}"
+#    image_copy_finished = "${null_resource.image_copy.id}"
     
     # image has been coppied at previous step already
-    image_location = "/tmp/${basename(var.image_location)}"
+#    image_location = "/tmp/${basename(var.image_location)}"
     
-    boot_ipv4_address_private = "${element(concat(azurerm_network_interface.boot_nic.*.private_ip_address, list("")), 0)}"
-    boot_ipv4_address = "${azurerm_public_ip.bootnode_pip.ip_address}"
-    boot_private_key_pem = "${tls_private_key.vmkey.private_key_pem}"
-    private_network_only = "false"
-    registry_server = "${local.registry_server}"
-    docker_username = "${local.docker_username}"
-    docker_password = "${local.docker_password}"
-}
+#    boot_ipv4_address_private = "${element(concat(azurerm_network_interface.boot_nic.*.private_ip_address, list("")), 0)}"
+#    boot_ipv4_address = "${azurerm_public_ip.bootnode_pip.ip_address}"
+#    boot_private_key_pem = "${tls_private_key.vmkey.private_key_pem}"
+#    private_network_only = "false"
+#    registry_server = "${local.registry_server}"
+#    docker_username = "${local.docker_username}"
+#    docker_password = "${local.docker_password}"
+#}
+
+
+
 
 module "icp_provision" {
   source = "git::https://github.com/IBM-CAMHub-Development/template_icp_modules.git?ref=3.2.1//public_cloud"
 
   bastion_host = "${azurerm_public_ip.bootnode_pip.ip_address}"
 
-  image_load_finished = "${module.image_load.image_load_finished}"
-  
+  #image_load_finished = "${module.image_load.image_load_finished}"
+  image_load_finished = true
   ssh_agent = false
   install-verbosity = "${var.install_verbosity != "" ? "${var.install_verbosity}" : ""}"
 
@@ -184,10 +187,12 @@ module "icp_provision" {
   ssh_key_base64   = "${base64encode(tls_private_key.vmkey.private_key_pem)}"
 
     # Make sure to wait for image load to complete
-    hooks = {
+  hooks = {
+      "boot-preconfig" = [
+        "while [ ! -f /opt/ibm/.imageload_complete ]; do sleep 5; done"
+      ]
        "postinstall" = [
          "/opt/ibm/scripts/copy_certif.sh"
        ]             
     }
-
 }
