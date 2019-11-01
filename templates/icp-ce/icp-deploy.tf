@@ -7,7 +7,7 @@
 # which is used by the azure cloud provider
 data "azurerm_client_config" "client_config" {}
 
-module "icpprovision" {
+module "icp_provision" {
   source = "git::https://github.com/IBM-CAMHub-Development/template_icp_modules.git?ref=3.2.1//public_cloud"
  
   bastion_host = "${element(concat(azurerm_public_ip.bootnode_pip.*.ip_address, azurerm_public_ip.master_pip.*.ip_address), 0)}"
