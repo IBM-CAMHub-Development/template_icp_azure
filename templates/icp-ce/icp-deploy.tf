@@ -12,7 +12,7 @@ module "icpprovision" {
  
   bastion_host = "${element(concat(azurerm_public_ip.bootnode_pip.*.ip_address, azurerm_public_ip.master_pip.*.ip_address), 0)}"
 
-  dependsOn = true
+  image_load_finished = true
   
   # Provide IP addresses for boot, master, mgmt, va, proxy and workers
   boot-node = "${element(concat(azurerm_network_interface.boot_nic.*.private_ip_address, azurerm_network_interface.master_nic.*.private_ip_address), 0)}"
